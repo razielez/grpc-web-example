@@ -1,0 +1,20 @@
+set positional-arguments
+set dotenv-load := true
+
+help:
+    @just --list --unsorted
+
+clean:
+  npm cache clean --force
+
+build:
+  npm install && npx webpack ./client.js 
+alias b := build
+
+server:
+  node server.js
+
+client:
+  python3 -m http.server 8081 
+proxy:
+  envoy -c envoy.yaml --log-level debug
